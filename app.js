@@ -9,18 +9,27 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB", {
 
 //Create a new schema (blueprint, structure of the data that will be saved into the mongoDB database)
 const fruitSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
+  name: {
+    type: String,
+    required: [true, "Please check your data entry. No name has been specified!"]
+  },
+  rating: {
+    type: Number,
+    //validate the data entered
+    min: 1,
+    max: 10
+  },
   review: String
 });
+
 
 //Use the schema to create a mongoose model - 1st parameter is the name of the collection that will comply with the fruitSchema schema, 2nd parameter is the schema (fruitSchema)
 const Fruit = mongoose.model("Fruit", fruitSchema);
 
 //Create a new fruit document
 const fruit = new Fruit({
-  name: "Apple",
-  rating: 7,
+  name: "Abacaxi",
+  rating: 10,
   review: "Pretty good"
 });
 
@@ -42,39 +51,50 @@ const person = new Person({
   age: 30
 });
 
-person.save();
+//person.save();
 
 
 
-const kiwi = new Fruit({
-  name: "Kiwi",
-  score: 10,
-  review: "Great fruit"
-});
 
 
-const orange = new Fruit({
-  name: "Orange",
-  score: 8,
-  review: "Sweet"
-});
-
-const banana = new Fruit({
-  name: "Banana",
-  score: 10,
-  review: "Great fruit"
-});
 
 
-//Specify the name of the mangoose model (Fruit), which will allow it to connect to the relevant collection, and also know the schema it should work with
-//It takes 2 parameters, the 1st one is an array of objects that match the schema, the second one is a callback which allow us to log any errors if there were any issues inserting all the objects into the fruits collection
-Fruit.insertMany([kiwi, orange, banana], function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Succesfully saved all the fruits to the fruitsDB")
-  }
-});
+
+// const kiwi = new Fruit({
+//   name: "Kiwi",
+//   score: 10,
+//   review: "Great fruit"
+// });
+//
+//
+// const orange = new Fruit({
+//   name: "Orange",
+//   score: 8,
+//   review: "Sweet"
+// });
+//
+// const banana = new Fruit({
+//   name: "Banana",
+//   score: 10,
+//   review: "Great fruit"
+// });
+//
+//
+// //Specify the name of the mangoose model (Fruit), which will allow it to connect to the relevant collection, and also know the schema it should work with
+// //It takes 2 parameters, the 1st one is an array of objects that match the schema, the second one is a callback which allow us to log any errors if there were any issues inserting all the objects into the fruits collection
+// Fruit.insertMany([kiwi, orange, banana], function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Succesfully saved all the fruits to the fruitsDB")
+//   }
+// });
+
+
+
+
+
+
 
 
 //Reading from DB with Mongoose
