@@ -34,7 +34,7 @@ const fruit = new Fruit({
 });
 
 //Calls the save method in mongoose to save the fruit document above (Apple) into a Fruits collection inside the fruitsDB
-fruit.save();
+//fruit.save();
 
 //Create a new schema for a person
 const personSchema = new mongoose.Schema({
@@ -52,11 +52,6 @@ const person = new Person({
 });
 
 //person.save();
-
-
-
-
-
 
 
 
@@ -93,10 +88,6 @@ const person = new Person({
 
 
 
-
-
-
-
 //Reading from DB with Mongoose
 Fruit.find(function(err, fruits) {
   if (err) {
@@ -116,6 +107,48 @@ Fruit.find(function(err, fruits) {
     });
   }
 });
+
+
+
+//Update One Method
+Fruit.updateOne({
+  _id: "604f52ef358d741028feadc1"
+}, {
+  name: "mamao"
+}, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Succesfully updated the document");
+  }
+});
+
+//Delete One Method
+Fruit.deleteOne({
+  _id: "604f52ef358d741028feadc1"
+}, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Succesfully deleted the document");
+  }
+});
+
+//Delete Many Method - Deletes all the Johns saved in the DB
+Person.deleteMany({
+  name: "John"
+}, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Succesfully deleted ALL the documents");
+  }
+});
+
+
+
+
+
 
 
 // //Find all documents
