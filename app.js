@@ -39,8 +39,29 @@ const fruit = new Fruit({
 //Create a new schema for a person
 const personSchema = new mongoose.Schema({
   name: String,
-  age: Number
+  age: Number,
+  favouriteFruit: fruitSchema
 });
+
+//Create a new fruit
+const pineapple = new Fruit({
+  name: "Pineapple",
+  score: 9,
+  review: "Great fruit"
+});
+
+//Save it into the fruits collection
+pineapple.save();
+
+//Create a new fruit
+const mamao = new Fruit({
+  name: "Mamao",
+  score: 10,
+  review: "Amazing fruit"
+});
+
+//Save it into the fruits collection
+mamao.save();
 
 //Create a mongoose model schema for a person
 const Person = mongoose.model("Person", personSchema);
@@ -48,10 +69,11 @@ const Person = mongoose.model("Person", personSchema);
 //Create a new person to the doc
 const person = new Person({
   name: "John",
-  age: 30
+  age: 37,
+  favouriteFruit: mamao
 });
 
-//person.save();
+person.save();
 
 
 
@@ -110,40 +132,40 @@ Fruit.find(function(err, fruits) {
 
 
 
-//Update One Method
-Fruit.updateOne({
-  _id: "604f52ef358d741028feadc1"
-}, {
-  name: "mamao"
-}, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Succesfully updated the document");
-  }
-});
-
-//Delete One Method
-Fruit.deleteOne({
-  _id: "604f52ef358d741028feadc1"
-}, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Succesfully deleted the document");
-  }
-});
-
-//Delete Many Method - Deletes all the Johns saved in the DB
-Person.deleteMany({
-  name: "John"
-}, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Succesfully deleted ALL the documents");
-  }
-});
+// //Update One Method
+// Fruit.updateOne({
+//   _id: "604f52ef358d741028feadc1"
+// }, {
+//   name: "mamao"
+// }, function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Succesfully updated the document");
+//   }
+// });
+//
+// //Delete One Method
+// Fruit.deleteOne({
+//   _id: "604f52ef358d741028feadc1"
+// }, function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Succesfully deleted the document");
+//   }
+// });
+//
+// //Delete Many Method - Deletes all the Johns saved in the DB
+// Person.deleteMany({
+//   name: "John"
+// }, function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Succesfully deleted ALL the documents");
+//   }
+// });
 
 
 
